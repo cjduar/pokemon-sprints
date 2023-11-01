@@ -14,6 +14,14 @@
 		852A1A332A1B023300DF876C /* LandmarksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A1A322A1B023300DF876C /* LandmarksTests.swift */; };
 		852A1A3D2A1B023300DF876C /* LandmarksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A1A3C2A1B023300DF876C /* LandmarksUITests.swift */; };
 		852A1A3F2A1B023300DF876C /* LandmarksUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A1A3E2A1B023300DF876C /* LandmarksUITestsLaunchTests.swift */; };
+		852A1A4C2A1B0B1D00DF876C /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A1A4B2A1B0B1D00DF876C /* CircleImage.swift */; };
+		85485D922A1C26C3008CBFAB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85485D912A1C26C3008CBFAB /* MapView.swift */; };
+		85C96A2B2A49D9470012D634 /* landmarkData.json in Resources */ = {isa = PBXBuildFile; fileRef = 85C96A2A2A49D9470012D634 /* landmarkData.json */; };
+		85C96A2D2A49D9810012D634 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C96A2C2A49D9810012D634 /* Landmark.swift */; };
+		85C96A2F2A4CE1950012D634 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C96A2E2A4CE1950012D634 /* ModelData.swift */; };
+		85E3EEA12A66153A00841993 /* LandmarkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E3EEA02A66153A00841993 /* LandmarkRow.swift */; };
+		85E3EEA32A661F5000841993 /* LandmarkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E3EEA22A661F5000841993 /* LandmarkList.swift */; };
+		85E3EEA52A6629D400841993 /* LandmarkDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E3EEA42A6629D400841993 /* LandmarkDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,16 +42,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		852A1A1E2A1B023100DF876C /* Landmarks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Landmarks.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		852A1A1E2A1B023100DF876C /* Pokemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		852A1A212A1B023100DF876C /* LandmarksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarksApp.swift; sourceTree = "<group>"; };
 		852A1A232A1B023100DF876C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		852A1A252A1B023200DF876C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		852A1A282A1B023200DF876C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		852A1A2E2A1B023300DF876C /* LandmarksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LandmarksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		852A1A2E2A1B023300DF876C /* PokemonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokemonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		852A1A322A1B023300DF876C /* LandmarksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarksTests.swift; sourceTree = "<group>"; };
-		852A1A382A1B023300DF876C /* LandmarksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LandmarksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		852A1A382A1B023300DF876C /* PokemonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokemonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		852A1A3C2A1B023300DF876C /* LandmarksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarksUITests.swift; sourceTree = "<group>"; };
 		852A1A3E2A1B023300DF876C /* LandmarksUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarksUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		852A1A4B2A1B0B1D00DF876C /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		85485D912A1C26C3008CBFAB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		85C96A2A2A49D9470012D634 /* landmarkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = landmarkData.json; sourceTree = "<group>"; };
+		85C96A2C2A49D9810012D634 /* Landmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
+		85C96A2E2A4CE1950012D634 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		85E3EEA02A66153A00841993 /* LandmarkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRow.swift; sourceTree = "<group>"; };
+		85E3EEA22A661F5000841993 /* LandmarkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkList.swift; sourceTree = "<group>"; };
+		85E3EEA42A6629D400841993 /* LandmarkDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,9 +100,9 @@
 		852A1A1F2A1B023100DF876C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				852A1A1E2A1B023100DF876C /* Landmarks.app */,
-				852A1A2E2A1B023300DF876C /* LandmarksTests.xctest */,
-				852A1A382A1B023300DF876C /* LandmarksUITests.xctest */,
+				852A1A1E2A1B023100DF876C /* Pokemon.app */,
+				852A1A2E2A1B023300DF876C /* PokemonTests.xctest */,
+				852A1A382A1B023300DF876C /* PokemonUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,8 +110,10 @@
 		852A1A202A1B023100DF876C /* Landmarks */ = {
 			isa = PBXGroup;
 			children = (
+				85C96A322A4F25410012D634 /* Model */,
+				85C96A312A4F25030012D634 /* Resources */,
 				852A1A212A1B023100DF876C /* LandmarksApp.swift */,
-				852A1A232A1B023100DF876C /* ContentView.swift */,
+				85C96A302A4F24BE0012D634 /* Views */,
 				852A1A252A1B023200DF876C /* Assets.xcassets */,
 				852A1A272A1B023200DF876C /* Preview Content */,
 			);
@@ -127,12 +145,42 @@
 			path = LandmarksUITests;
 			sourceTree = "<group>";
 		};
+		85C96A302A4F24BE0012D634 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				852A1A4B2A1B0B1D00DF876C /* CircleImage.swift */,
+				852A1A232A1B023100DF876C /* ContentView.swift */,
+				85485D912A1C26C3008CBFAB /* MapView.swift */,
+				85E3EEA02A66153A00841993 /* LandmarkRow.swift */,
+				85E3EEA22A661F5000841993 /* LandmarkList.swift */,
+				85E3EEA42A6629D400841993 /* LandmarkDetail.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		85C96A312A4F25030012D634 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				85C96A2A2A49D9470012D634 /* landmarkData.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		85C96A322A4F25410012D634 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				85C96A2C2A49D9810012D634 /* Landmark.swift */,
+				85C96A2E2A4CE1950012D634 /* ModelData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		852A1A1D2A1B023000DF876C /* Landmarks */ = {
+		852A1A1D2A1B023000DF876C /* Pokemon */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 852A1A422A1B023300DF876C /* Build configuration list for PBXNativeTarget "Landmarks" */;
+			buildConfigurationList = 852A1A422A1B023300DF876C /* Build configuration list for PBXNativeTarget "Pokemon" */;
 			buildPhases = (
 				852A1A1A2A1B023000DF876C /* Sources */,
 				852A1A1B2A1B023000DF876C /* Frameworks */,
@@ -142,14 +190,14 @@
 			);
 			dependencies = (
 			);
-			name = Landmarks;
+			name = Pokemon;
 			productName = Landmarks;
-			productReference = 852A1A1E2A1B023100DF876C /* Landmarks.app */;
+			productReference = 852A1A1E2A1B023100DF876C /* Pokemon.app */;
 			productType = "com.apple.product-type.application";
 		};
-		852A1A2D2A1B023300DF876C /* LandmarksTests */ = {
+		852A1A2D2A1B023300DF876C /* PokemonTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 852A1A452A1B023300DF876C /* Build configuration list for PBXNativeTarget "LandmarksTests" */;
+			buildConfigurationList = 852A1A452A1B023300DF876C /* Build configuration list for PBXNativeTarget "PokemonTests" */;
 			buildPhases = (
 				852A1A2A2A1B023300DF876C /* Sources */,
 				852A1A2B2A1B023300DF876C /* Frameworks */,
@@ -160,14 +208,14 @@
 			dependencies = (
 				852A1A302A1B023300DF876C /* PBXTargetDependency */,
 			);
-			name = LandmarksTests;
+			name = PokemonTests;
 			productName = LandmarksTests;
-			productReference = 852A1A2E2A1B023300DF876C /* LandmarksTests.xctest */;
+			productReference = 852A1A2E2A1B023300DF876C /* PokemonTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		852A1A372A1B023300DF876C /* LandmarksUITests */ = {
+		852A1A372A1B023300DF876C /* PokemonUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 852A1A482A1B023300DF876C /* Build configuration list for PBXNativeTarget "LandmarksUITests" */;
+			buildConfigurationList = 852A1A482A1B023300DF876C /* Build configuration list for PBXNativeTarget "PokemonUITests" */;
 			buildPhases = (
 				852A1A342A1B023300DF876C /* Sources */,
 				852A1A352A1B023300DF876C /* Frameworks */,
@@ -178,9 +226,9 @@
 			dependencies = (
 				852A1A3A2A1B023300DF876C /* PBXTargetDependency */,
 			);
-			name = LandmarksUITests;
+			name = PokemonUITests;
 			productName = LandmarksUITests;
-			productReference = 852A1A382A1B023300DF876C /* LandmarksUITests.xctest */;
+			productReference = 852A1A382A1B023300DF876C /* PokemonUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +254,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 852A1A192A1B023000DF876C /* Build configuration list for PBXProject "Landmarks" */;
+			buildConfigurationList = 852A1A192A1B023000DF876C /* Build configuration list for PBXProject "Pokemon" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -219,9 +267,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				852A1A1D2A1B023000DF876C /* Landmarks */,
-				852A1A2D2A1B023300DF876C /* LandmarksTests */,
-				852A1A372A1B023300DF876C /* LandmarksUITests */,
+				852A1A1D2A1B023000DF876C /* Pokemon */,
+				852A1A2D2A1B023300DF876C /* PokemonTests */,
+				852A1A372A1B023300DF876C /* PokemonUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -233,6 +281,7 @@
 			files = (
 				852A1A292A1B023200DF876C /* Preview Assets.xcassets in Resources */,
 				852A1A262A1B023200DF876C /* Assets.xcassets in Resources */,
+				85C96A2B2A49D9470012D634 /* landmarkData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +307,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				852A1A242A1B023100DF876C /* ContentView.swift in Sources */,
+				85485D922A1C26C3008CBFAB /* MapView.swift in Sources */,
 				852A1A222A1B023100DF876C /* LandmarksApp.swift in Sources */,
+				85E3EEA32A661F5000841993 /* LandmarkList.swift in Sources */,
+				85E3EEA52A6629D400841993 /* LandmarkDetail.swift in Sources */,
+				852A1A4C2A1B0B1D00DF876C /* CircleImage.swift in Sources */,
+				85C96A2D2A49D9810012D634 /* Landmark.swift in Sources */,
+				85E3EEA12A66153A00841993 /* LandmarkRow.swift in Sources */,
+				85C96A2F2A4CE1950012D634 /* ModelData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,12 +340,12 @@
 /* Begin PBXTargetDependency section */
 		852A1A302A1B023300DF876C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 852A1A1D2A1B023000DF876C /* Landmarks */;
+			target = 852A1A1D2A1B023000DF876C /* Pokemon */;
 			targetProxy = 852A1A2F2A1B023300DF876C /* PBXContainerItemProxy */;
 		};
 		852A1A3A2A1B023300DF876C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 852A1A1D2A1B023000DF876C /* Landmarks */;
+			target = 852A1A1D2A1B023000DF876C /* Pokemon */;
 			targetProxy = 852A1A392A1B023300DF876C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -483,7 +539,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Landmarks.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Landmarks";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pokemon.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Pokemon";
 			};
 			name = Debug;
 		};
@@ -503,7 +559,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Landmarks.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Landmarks";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pokemon.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Pokemon";
 			};
 			name = Release;
 		};
@@ -546,7 +602,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		852A1A192A1B023000DF876C /* Build configuration list for PBXProject "Landmarks" */ = {
+		852A1A192A1B023000DF876C /* Build configuration list for PBXProject "Pokemon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				852A1A402A1B023300DF876C /* Debug */,
@@ -555,7 +611,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		852A1A422A1B023300DF876C /* Build configuration list for PBXNativeTarget "Landmarks" */ = {
+		852A1A422A1B023300DF876C /* Build configuration list for PBXNativeTarget "Pokemon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				852A1A432A1B023300DF876C /* Debug */,
@@ -564,7 +620,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		852A1A452A1B023300DF876C /* Build configuration list for PBXNativeTarget "LandmarksTests" */ = {
+		852A1A452A1B023300DF876C /* Build configuration list for PBXNativeTarget "PokemonTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				852A1A462A1B023300DF876C /* Debug */,
@@ -573,7 +629,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		852A1A482A1B023300DF876C /* Build configuration list for PBXNativeTarget "LandmarksUITests" */ = {
+		852A1A482A1B023300DF876C /* Build configuration list for PBXNativeTarget "PokemonUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				852A1A492A1B023300DF876C /* Debug */,

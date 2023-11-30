@@ -1,20 +1,20 @@
+////
+////  ContentView.swift
+////  Landmarks
+////
+////  Created by Christopher Duarte on 5/21/23.
+////
 //
-//  ContentView.swift
-//  Landmarks
+//import SwiftUI
 //
-//  Created by Christopher Duarte on 5/21/23.
+////struct ContentView: View {
+//    var body: some View {
+//            LandmarkList()
+//    }
+//}
 //
-
-import SwiftUI
-
-struct ContentView: View {
-    var body: some View {
-            LandmarkList()
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+////struct ContentView_Previews: PreviewProvider {
+////    static var previews: some View {
+////        ContentView()
+////    }
+////}

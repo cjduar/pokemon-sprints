@@ -8,22 +8,18 @@
 import SwiftUI
 
 struct ListView: View {
+    @ObservedObject var listModel = PokemonViewModel()
     var body: some View {
         NavigationView(
             List(listModel.pokemons){ pokemons in
                 Text(pokemon.name)
             }
-//            content: {
-//            NavigationLink(destination:
-//                            List{Text("Destination");
-//                Text("Destination")
-//            })
-//            { /*@START_MENU_TOKEN@*/Text("Navigate")/*@END_MENU_TOKEN@*/ }
-//        })
-        
-        
-        }
-    }
+                        .navigationTitle("Pokémons")
+                        .onAppear {
+                            viewModel.fetchPokemons()
+                        }
+                    }
+                }
     
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {

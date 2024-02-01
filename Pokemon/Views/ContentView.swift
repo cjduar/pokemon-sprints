@@ -13,7 +13,7 @@ struct ListView: View {
     var body: some View {
         NavigationView {
             List(listModel.pokemons, id: \.name) { pokemon in
-                Text(pokemon.name)
+                NavigationLink(destination:PokemonView(pokemonName: pokemon.name)){ Text(pokemon.name)}
             }
             .navigationTitle("Pokémons")
             .onAppear {

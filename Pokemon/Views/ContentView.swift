@@ -8,16 +8,32 @@
 import SwiftUI
 
 struct ListView: View {
-    @ObservedObject var listModel = PokemonViewModel()
-
+    @StateObject private var viewModel = PokemonViewModel()
+    
     var body: some View {
         NavigationView {
-            List(listModel.pokemons, id: \.name) { pokemon in
-                NavigationLink(destination:PokemonView(pokemonName: pokemon.name)){ Text(pokemon.name)}
+            List {
+                ForEach(viewModel.pokemons) { pokemon in
+                    NavigationLink(destination: PokemonView(pokemonName: pokemon.name)) {
+                        Text(pokemon.name)
+                    }
+                    .onAppear {
+                        if pokemon.id == viewModel.pokemons.last?.id {
+                            viewModel.loadMorePokemonIfNeeded()
+                        }
+                    }
+                }
+                
+                if viewModel.isLoading {
+                    ProgressView()
+                        .frame(idealWidth: .infinity, alignment: .center)
+                }
             }
             .navigationTitle("Pokémons")
             .onAppear {
-                listModel.fetchPokemons()
+                if viewModel.pokemons.isEmpty {
+                    viewModel.fetchPokemons()
+                }
             }
         }
     }

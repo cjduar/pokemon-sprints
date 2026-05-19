@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 func getPokemon(pokemonName: String) async throws -> PokemonData {
     guard let encodedPokemonName = pokemonName.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
@@ -28,23 +27,56 @@ func getPokemon(pokemonName: String) async throws -> PokemonData {
         throw PKError.invalidData
     }
 }
-    
-    struct PokemonData:Codable {
-        struct Species: Codable {
+
+struct PokemonData: Codable {
+    struct Species: Codable {
+        let name: String
+        let url: URL
+    }
+
+    struct Sprites: Codable {
+        let frontDefault: URL?
+        let backDefault: URL?
+        let frontShiny: URL?
+        let backShiny: URL?
+    }
+
+    struct PokemonType: Codable, Identifiable {
+        struct TypeInfo: Codable {
             let name: String
             let url: URL
         }
-        struct Sprites: Codable{
-            let backDefault: URL?
-            let frontShiny: String
-        }
-        let sprites: Sprites
-        let species: Species
-    }
-    
-    enum PKError: Error {
-        case invalidURL
-        case invalidResponse
-        case invalidData
+
+        let slot: Int
+        let type: TypeInfo
+
+        var id: Int { slot }
     }
 
+    struct Stat: Codable, Identifiable {
+        struct StatInfo: Codable {
+            let name: String
+            let url: URL
+        }
+
+        let baseStat: Int
+        let stat: StatInfo
+
+        var id: String { stat.name }
+    }
+
+    let id: Int
+    let height: Int
+    let weight: Int
+    let baseExperience: Int?
+    let sprites: Sprites
+    let species: Species
+    let types: [PokemonType]
+    let stats: [Stat]
+}
+
+enum PKError: Error {
+    case invalidURL
+    case invalidResponse
+    case invalidData
+}

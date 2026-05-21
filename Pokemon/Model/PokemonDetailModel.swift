@@ -13,6 +13,36 @@ func getPokemon(pokemonName: String) async throws -> PokemonData {
         throw PKError.invalidURL
     }
 
+    return try await fetchDecodable(from: url)
+}
+
+func getEvolvedSprintPokemon(for pokemonName: String, currentLevel: Int) async throws -> SprintPokemon? {
+    let pokemon = try await getPokemon(pokemonName: pokemonName)
+    let species = try await fetchDecodable(SpeciesData.self, from: pokemon.species.url)
+    let evolutionChain = try await fetchDecodable(EvolutionChainData.self, from: species.evolutionChain.url)
+
+    guard let evolvedName = evolutionChain.chain.nextEvolutionName(after: pokemon.species.name) else {
+        return nil
+    }
+
+    let evolvedPokemon = try await getPokemon(pokemonName: evolvedName)
+
+    return SprintPokemon(
+        name: evolvedPokemon.species.name,
+        artworkURL: evolvedPokemon.officialArtworkURL,
+        level: currentLevel
+    )
+}
+
+func getEvolutionChainNames(for pokemonName: String) async throws -> [String] {
+    let pokemon = try await getPokemon(pokemonName: pokemonName)
+    let species = try await fetchDecodable(SpeciesData.self, from: pokemon.species.url)
+    let evolutionChain = try await fetchDecodable(EvolutionChainData.self, from: species.evolutionChain.url)
+
+    return evolutionChain.chain.evolutionNames
+}
+
+private func fetchDecodable<T: Decodable>(_ type: T.Type = T.self, from url: URL) async throws -> T {
     let (data, response) = try await URLSession.shared.data(from: url)
 
     guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
@@ -22,7 +52,7 @@ func getPokemon(pokemonName: String) async throws -> PokemonData {
     do {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try decoder.decode(PokemonData.self, from: data)
+        return try decoder.decode(T.self, from: data)
     } catch {
         throw PKError.invalidData
     }
@@ -73,6 +103,50 @@ struct PokemonData: Codable {
     let species: Species
     let types: [PokemonType]
     let stats: [Stat]
+
+    var officialArtworkURL: URL? {
+        URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png")
+    }
+}
+
+struct SpeciesData: Codable {
+    struct EvolutionChainReference: Codable {
+        let url: URL
+    }
+
+    let evolutionChain: EvolutionChainReference
+}
+
+struct EvolutionChainData: Codable {
+    struct ChainLink: Codable {
+        struct Species: Codable {
+            let name: String
+            let url: URL
+        }
+
+        let species: Species
+        let evolvesTo: [ChainLink]
+
+        var evolutionNames: [String] {
+            [species.name] + evolvesTo.flatMap(\.evolutionNames)
+        }
+
+        func nextEvolutionName(after pokemonName: String) -> String? {
+            if species.name.lowercased() == pokemonName.lowercased() {
+                return evolvesTo.first?.species.name
+            }
+
+            for evolution in evolvesTo {
+                if let nextName = evolution.nextEvolutionName(after: pokemonName) {
+                    return nextName
+                }
+            }
+
+            return nil
+        }
+    }
+
+    let chain: ChainLink
 }
 
 enum PKError: Error {

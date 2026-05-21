@@ -9,20 +9,30 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var favoritesManager = FavoritesManager()
+    @StateObject private var sprintManager = SprintManager()
 
     var body: some View {
         TabView {
+            SprintView()
+                .tabItem {
+                    Label("Sprints", systemImage: "flag.checkered")
+                }
+                .environmentObject(sprintManager)
+                .environmentObject(favoritesManager)
+
             ListView()
                 .tabItem {
                     Label("All Pokemon", systemImage: "square.grid.2x2.fill")
                 }
                 .environmentObject(favoritesManager)
+                .environmentObject(sprintManager)
 
             FavoritesView()
                 .tabItem {
                     Label("Favorites", systemImage: "star.fill")
                 }
                 .environmentObject(favoritesManager)
+                .environmentObject(sprintManager)
         }
     }
 }

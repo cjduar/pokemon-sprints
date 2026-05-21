@@ -9,8 +9,12 @@ import SwiftUI
 struct PokemonView: View {
     @State private var pkmon: PokemonData?
     @State private var selectedSpriteTitle = "Front"
+    @State private var evolutionNames: [String] = []
+    @State private var isLoadingEvolutionChain = false
+    @State private var isShowingAddSprint = false
     @State private var loadingError: String?
     @EnvironmentObject var favoritesManager: FavoritesManager
+    @EnvironmentObject var sprintManager: SprintManager
 
     var pokemonName: String
 
@@ -49,6 +53,11 @@ struct PokemonView: View {
         favoritesManager.isFavorite(pokemonName)
     }
 
+    private var sprintPokemon: Pokemon? {
+        guard let pkmon else { return nil }
+        return Pokemon(name: pkmon.species.name, url: "https://pokeapi.co/api/v2/pokemon/\(pkmon.id)/")
+    }
+
     var body: some View {
         ZStack {
             PokemonTheme.background
@@ -66,9 +75,10 @@ struct PokemonView: View {
                     }
 
                     infoSection
+                    evolutionSection
                     spriteSection
                     statsSection
-                    favoriteButton
+                    addToSprintButton
                 }
                 .padding(16)
             }
@@ -78,29 +88,49 @@ struct PokemonView: View {
         .task {
             await loadPokemon()
         }
+        .sheet(isPresented: $isShowingAddSprint) {
+            AddSprintView(preselectedPokemon: sprintPokemon)
+                .environmentObject(sprintManager)
+                .environmentObject(favoritesManager)
+        }
     }
 
     private var heroSection: some View {
         VStack(spacing: 14) {
-            ZStack {
-                Circle()
-                    .fill(typeColor.opacity(0.22))
-                    .frame(width: 230, height: 230)
+            ZStack(alignment: .topTrailing) {
+                ZStack {
+                    Circle()
+                        .fill(typeColor.opacity(0.22))
+                        .frame(width: 230, height: 230)
 
-                Circle()
-                    .stroke(typeColor.opacity(0.35), lineWidth: 2)
-                    .frame(width: 230, height: 230)
+                    Circle()
+                        .stroke(typeColor.opacity(0.35), lineWidth: 2)
+                        .frame(width: 230, height: 230)
 
-                AsyncImage(url: selectedSpriteURL) { image in
-                    image
-                        .resizable()
-                        .interpolation(.none)
-                        .scaledToFit()
-                } placeholder: {
-                    ProgressView()
-                        .controlSize(.large)
+                    AsyncImage(url: selectedSpriteURL) { image in
+                        image
+                            .resizable()
+                            .interpolation(.none)
+                            .scaledToFit()
+                    } placeholder: {
+                        ProgressView()
+                            .controlSize(.large)
+                    }
+                    .frame(width: 190, height: 190)
                 }
-                .frame(width: 190, height: 190)
+
+                Button {
+                    favoritesManager.toggleFavorite(for: pokemonName)
+                } label: {
+                    Image(systemName: isFavorite ? "star.fill" : "star")
+                        .font(.headline)
+                        .foregroundStyle(isFavorite ? .yellow : .secondary)
+                        .frame(width: 42, height: 42)
+                        .background(Color(.systemBackground))
+                        .clipShape(Circle())
+                        .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 3)
+                }
+                .buttonStyle(.plain)
             }
 
             VStack(spacing: 10) {
@@ -144,6 +174,46 @@ struct PokemonView: View {
                 InfoTile(title: "Weight", value: weightText)
                 InfoTile(title: "Base XP", value: baseExperienceText)
                 InfoTile(title: "Type", value: primaryTypeName.capitalized)
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(.systemBackground).opacity(0.88))
+        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+    }
+
+    private var evolutionSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Evolution Chain")
+                .font(.headline)
+
+            if isLoadingEvolutionChain {
+                ProgressView()
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.vertical, 10)
+            } else if evolutionNames.isEmpty {
+                Text("No evolution chain found")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 10) {
+                        ForEach(Array(evolutionNames.enumerated()), id: \.offset) { index, name in
+                            EvolutionChainItem(
+                                name: name,
+                                isCurrentPokemon: name.lowercased() == (pkmon?.species.name ?? pokemonName).lowercased(),
+                                tint: typeColor
+                            )
+
+                            if index < evolutionNames.count - 1 {
+                                Image(systemName: "chevron.right")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                    .padding(.vertical, 2)
+                }
             }
         }
         .padding(16)
@@ -196,24 +266,25 @@ struct PokemonView: View {
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
     }
 
-    private var favoriteButton: some View {
+    private var addToSprintButton: some View {
         Button {
-            favoritesManager.toggleFavorite(for: pokemonName)
+            isShowingAddSprint = true
         } label: {
             HStack(spacing: 10) {
-                Image(systemName: isFavorite ? "star.fill" : "star")
+                Image(systemName: "flag.checkered")
                     .font(.headline)
 
-                Text(isFavorite ? "Remove Favorite" : "Add Favorite")
+                Text("Add to Sprint")
                     .fontWeight(.semibold)
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 15)
             .foregroundStyle(.white)
-            .background(isFavorite ? Color.orange : typeColor)
+            .background(typeColor)
             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
         }
         .buttonStyle(.plain)
+        .disabled(sprintPokemon == nil)
     }
 
     private var heightText: String {
@@ -236,8 +307,20 @@ struct PokemonView: View {
             loadingError = nil
             pkmon = try await getPokemon(pokemonName: pokemonName)
             selectedSpriteTitle = spriteOptions.first?.title ?? "Front"
+            await loadEvolutionChain()
         } catch {
             loadingError = "Unable to load this Pokemon right now."
+        }
+    }
+
+    private func loadEvolutionChain() async {
+        isLoadingEvolutionChain = true
+        defer { isLoadingEvolutionChain = false }
+
+        do {
+            evolutionNames = try await getEvolutionChainNames(for: pokemonName)
+        } catch {
+            evolutionNames = []
         }
     }
 }
@@ -247,6 +330,23 @@ private struct SpriteOption: Identifiable {
     let url: URL?
 
     var id: String { title }
+}
+
+private struct EvolutionChainItem: View {
+    let name: String
+    let isCurrentPokemon: Bool
+    let tint: Color
+
+    var body: some View {
+        Text(name.capitalized)
+            .font(.caption)
+            .fontWeight(.bold)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .foregroundStyle(isCurrentPokemon ? .white : .primary)
+            .background(isCurrentPokemon ? tint : Color(.secondarySystemBackground))
+            .clipShape(Capsule())
+    }
 }
 
 private struct InfoTile: View {
@@ -378,6 +478,7 @@ struct PokemonView_Previews: PreviewProvider {
         NavigationView {
             PokemonView(pokemonName: "pikachu")
                 .environmentObject(FavoritesManager())
+                .environmentObject(SprintManager())
         }
     }
 }
